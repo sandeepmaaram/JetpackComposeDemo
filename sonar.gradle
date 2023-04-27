@@ -1,0 +1,18 @@
+//apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property 'sonar.projectName', 'JetpackComposeDemot'
+        property 'sonar.projectKey', 'sandeepmaaram_JetpackComposeDemo'
+        property 'sonar.organization', 'sandeepmaaram'
+        property 'sonar.login', 'sonarToken'
+        property "sonar.host.url", "https://sonarcloud.io/"
+        property "sonar.sources", "./src/main"
+        property "sonar.tests", "./src/test"
+        property "sonar.exclusions", "*/.c, */*Test/*, *.json, */.gradle/*, */R.class, */R.java, */ui/*"
+        property "sonar.c.file.suffixes", "-"
+
+        property 'sonar.java.coveragePlugin', 'jacoco'
+        property "sonar.coverage.jacoco.htmlReportPaths", "./build/reports/jacoco/testDevDebugUnitTestCoverage/jacoco.xml"
+    }
+}
