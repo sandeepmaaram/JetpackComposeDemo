@@ -18,6 +18,9 @@ subprojects {
         project.apply from: '../jacoco.gradle'
         project.apply from: '../sonar.gradle'
     }
+    sonarqube {
+        androidVariant "prodDebug"
+    }
 }
 
 
