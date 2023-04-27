@@ -6,10 +6,22 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  sonarqube-analysis:
-    uses: sandeepmaaram/JetpackComposeDemo/.github/workflows/sonarqube-analysis.yml@master
-    with:
-      space: dev
-    secrets:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  builds:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.17
+
+      - name: Build Gradle
+        run: ./gradlew build
+
+      - name : Upload Code Analysis To SonarCloud
+        run: ./gradlew build sonarqube --info
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
