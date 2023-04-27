@@ -1,0 +1,15 @@
+on:
+  # Trigger when creating a pull request, and when pushing in pull requests.
+  pull_request:
+    branches:
+      - develop
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarqube-analysis:
+    uses: sandeepmaaram/JetpackComposeDemo/.github/workflows/sonarqube-analysis.yml@master
+    with:
+      space: dev
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
